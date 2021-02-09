@@ -66,7 +66,7 @@ class AssignsController < ApplicationController
   end
   def require_same_user
     unless current_user.id.in?(Array.new([Team.friendly.find(params[:team_id]).owner_id, Assign.find(params[:id]).user_id]))
-      redirect_to team_url(params[ :team_id ]),  notice: "Permission not granted!"
+    redirect_to team_url(params[ :team_id ]),  notice: "Permission not granted!"
     end
   end
 end
