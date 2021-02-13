@@ -18,9 +18,8 @@ class TeamsController < ApplicationController
   end
 
   def edit
-    if current_user.id == @team.owner_id
-    notice: "Access Denied!"
-    redirect_to team_url(params[:id ])
+    unless current_user.id == @team.owner_id
+    redirect_to team_url(params[:id ]), notice: "Access Denied!"
   end
  end
   def create
