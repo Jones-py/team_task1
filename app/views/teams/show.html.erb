@@ -21,6 +21,8 @@
                   <%= text_field_tag :email, '', { class: 'form-control', placeholder: I18n.t('views.messages.invitation_placeholder') } %>
                   <span class="input-group-append">
                     <button type="submit" class="btn btn-info btn-flat"><%= I18n.t('views.button.invite') %></button>
+
+
                   </span>
                 </div>
               <% end %>
@@ -42,17 +44,19 @@
                       <td><%= image_tag 'default.jpg', size: '40x40' %></td>
                       <td><%= assign.user.email %></td>
                       <td><%= link_to I18n.t('views.button.delete'), team_assign_path(@team, assign), method: :delete, class: 'btn btn-sm btn-danger' %></td>
-                    </tr>
-                  <% end %>
-                </tbody>
-              </table>
-            </div>
+                      <td><%= link_to 'Assign leader', team_authority_transfer_path(@team, params: { user_id: assign.user_id }), method: :post, class: 'btn btn-sm btn-info' if current_user.id == @team.owner_id && current_user.id != assign.user_id%></td>
+
+                  </tr>
+                <%end%>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
-      <!-- /.card-body -->
     </div>
-    <!-- /.card -->
+    <!-- /.card-body -->
   </div>
-  <!-- ./col -->
+  <!-- /.card -->
+</div>
+<!-- ./col -->
 </div>

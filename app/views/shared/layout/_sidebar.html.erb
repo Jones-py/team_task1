@@ -22,7 +22,7 @@
               <button type="submit" class="btn btn-info btn-flat"><%= I18n.t('views.button.create') %></button>
             </span>
           </div>
-        <% end %>
+      <% end %>
       </div>
     </div>
     <!-- Sidebar Menu -->
@@ -33,8 +33,12 @@
             <a href="#" class="nav-link">
               <i class="fa fa-circle-o nav-icon"></i>
               <p>
-                <%= agenda.title %>
-                <i class="right fa fa-angle-left"></i>
+               <%= agenda.title %>
+               <% if current_user.id == agenda.user_id ||current_user.id == @working_team.owner_id %>
+               <%= link_to I18n.t('views.button.delete'), agenda,class: "delete", method: :delete, data: { confirm: 'Agenda will be removed: Are you sure?' }%>
+               <i class="right fa fa-angle-left"></i>
+               <% end %>
+
               </p>
             </a>
             <ul class="nav nav-treeview" style="display: block;">
