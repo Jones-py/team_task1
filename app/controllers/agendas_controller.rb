@@ -1,5 +1,5 @@
 class AgendasController < ApplicationController
-  
+
 
   def index
     @agendas = Agenda.all
@@ -22,12 +22,16 @@ class AgendasController < ApplicationController
   end
   def destroy
     @agenda =Agenda.find(params[:id])
-    @agenda.destroy
       respond_to do |format|
+        if @agenda.destroy && (current_user.id == @agenda.user_id || current_user.id == @agenda.team.owner_id)
+         NoticeMailer.agenda_remove_mail(@agenda.team.members.pluck(:email),current_user,@agenda).deliver
         format.html { redirect_to dashboard_url, notice: 'agender was successfully destroyed.' }
         format.json { head :no_content }
+      else
+       redirect_to  dashboard_path,  notice: " Agenda fialed to delete"
       end
     end
+  end
   private
 
   def set_agenda
