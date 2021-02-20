@@ -18,7 +18,7 @@
         <% agenda.articles.each do |article| %>
           <li>Article title:<%= article.title %></li>
         <% end %>
-        <tr><%= link_to "Delete", agenda,class:"btn btn-outline-danger btn-sm", method: :delete, data: {confirm: 'Are you sure?' } %></tr>
+        <tr><%= link_to "Delete", agenda, class:"btn btn-outline-danger btn-sm", method: :delete, data: {confirm: 'Are you sure?' } %></tr>
 
       </table>
     <% end %>
